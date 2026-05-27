@@ -288,7 +288,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:500;line-height:1.08;letter-spa
   <div class="wrap"><div class="dash-grid">
     <div>
       <div class="panel" style="margin-bottom:24px">
-        <div class="head"><h3>Your checklist</h3><a>View all →</a></div>
+        <div class="head"><h3>Your checklist</h3><a onclick="openChecklist()" style="cursor:pointer">View all →</a></div>
         <div class="todo done"><span class="box"></span><span>Set your date and vision</span><small>Done</small></div>
         <div class="todo done"><span class="box"></span><span>Save how you'd like it to feel</span><small>Done</small></div>
         <div class="todo"><span class="box"></span><span>Book your celebrant</span><small>9 to 12 mo</small></div>
@@ -336,6 +336,23 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:500;line-height:1.08;letter-spa
       </div>
     </div>
   </div></div>
+</div>
+
+<!-- ============ CHECKLIST ============ -->
+<div class="view" id="view-checklist">
+  <section class="section"><div class="wrap" style="max-width:760px">
+    <a class="link-back" onclick="go('dash')" style="display:inline-block;margin-bottom:22px">← Back to Your Wedding</a>
+    <p class="eyebrow">Your checklist</p>
+    <h2 style="font-size:clamp(1.9rem,4.5vw,2.6rem);margin:12px 0 12px">Everything, in the right order</h2>
+    <p class="muted">I've put this together around your day, sorted so the next thing is always at the top. Tick things off as you go, and add your own whenever you like.</p>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin:28px 0 8px"><b id="cl-count">0 of 0 done</b><span class="muted" style="font-size:.84rem">You're doing beautifully</span></div>
+    <div class="bar"><span id="cl-bar" style="width:0"></span></div>
+    <div id="cl-groups" style="margin:34px 0"></div>
+    <div style="background:var(--white);border:1px solid var(--line);padding:22px;border-radius:3px;display:flex;gap:12px;align-items:flex-end">
+      <div style="flex:1;text-align:left"><label style="display:block;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--stone);margin-bottom:9px">Add your own</label><input id="cl-new" placeholder="e.g. Book a hair and makeup trial" style="width:100%;padding:13px 15px;border:1px solid var(--line);font-family:var(--sans);font-size:1rem;border-radius:2px;font-weight:300"></div>
+      <button class="btn btn-sm" onclick="addCL()" style="white-space:nowrap">Add</button>
+    </div>
+  </div></section>
 </div>
 
 <script>
@@ -396,6 +413,36 @@ function openDash(){
   if(data.budget){var b=parseInt(String(data.budget).replace(/[^0-9]/g,''))||35000;document.getElementById('budTotal').textContent='$'+b.toLocaleString();document.getElementById('budSpent').textContent='$'+Math.round(b*0.34).toLocaleString();}
   go('dash');
 }
+
+/* ---- checklist ---- */
+var CL=[
+ {g:'12+ months out',items:['Set your wedding date','Settle on a budget','Draft your guest list','Book your celebrant','Find and book your venue','Start gathering inspiration']},
+ {g:'9 to 12 months',items:['Book your photographer','Lock in your catering','Choose your wedding party','Start dress and suit shopping','Book your stylist and florals']},
+ {g:'6 to 9 months',items:['Send your save the dates','Order your invitations','Book music and entertainment','Plan your honeymoon','Arrange transport']},
+ {g:'3 to 6 months',items:['Send your invitations','Finalise your menu','Order your cake','Choose your rings','Book hair and makeup trials']},
+ {g:'1 to 3 months',items:['Chase up your RSVPs','Create your seating plan','Final dress fitting','Write your vows','Confirm timings with all your vendors']},
+ {g:'The final weeks',items:['Confirm final guest numbers','Pay any remaining balances','Have your rehearsal','Pack for your honeymoon','Take a breath and enjoy']},
+ {g:'Your own',items:[]}
+];
+var clDone={'0-0':true,'0-1':true};
+function renderCL(){
+  var html='',total=0,doneN=0;
+  for(var gi=0;gi<CL.length;gi++){
+    if(!CL[gi].items.length)continue;
+    html+='<div style="margin-bottom:30px"><p class="eyebrow" style="margin-bottom:12px">'+CL[gi].g+'</p>';
+    for(var ii=0;ii<CL[gi].items.length;ii++){
+      var key=gi+'-'+ii;total++;if(clDone[key])doneN++;
+      html+='<div class="todo'+(clDone[key]?' done':'')+'" onclick="toggleCL(\''+key+'\')" style="cursor:pointer"><span class="box"></span><span>'+CL[gi].items[ii]+'</span></div>';
+    }
+    html+='</div>';
+  }
+  document.getElementById('cl-groups').innerHTML=html;
+  document.getElementById('cl-count').textContent=doneN+' of '+total+' done';
+  document.getElementById('cl-bar').style.width=(total?Math.round(doneN/total*100):0)+'%';
+}
+function toggleCL(k){clDone[k]=!clDone[k];renderCL();}
+function addCL(){var i=document.getElementById('cl-new'),v=i.value.trim();if(!v)return;CL[CL.length-1].items.push(v);i.value='';renderCL();}
+function openChecklist(){renderCL();go('checklist');}
 </script>
 </body>
 </html>

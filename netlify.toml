@@ -1,0 +1,3 @@
+# Prototype preview deploy — serves the static prototype/ folder, no build step.
+[build]
+  publish = "prototype"

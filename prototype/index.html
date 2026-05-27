@@ -215,6 +215,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:500;line-height:1.08;letter-spa
       <div class="step active">
         <p class="q-eyebrow">First things first</p><h2>Who's getting married?</h2>
         <div class="field"><label>Your names</label><input name="names" placeholder="e.g. Ella &amp; James"></div>
+        <div class="field"><label>Your partner's email (optional)</label><input name="partnerEmail" type="email" placeholder="I'll send them a lovely invite to plan alongside you"></div>
         <div class="step-nav"><span></span><button class="btn" onclick="next()">Continue</button></div>
       </div>
 
@@ -323,6 +324,11 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:500;line-height:1.08;letter-spa
         <div class="todo"><span class="box"></span><span>Cake &amp; catering</span><small>Browse</small></div>
         <p class="muted" style="font-size:.85rem;margin-top:14px">With me, the heart of your team is already sorted. I'll help you find the rest, from people I genuinely trust.</p>
       </div>
+      <div class="grid g3" style="gap:16px;margin-top:24px">
+        <div class="card" onclick="openGuests()" style="cursor:pointer"><div class="card-body center"><h3 style="font-size:1.25rem">Guest list</h3><p class="muted" style="font-size:.84rem">RSVPs &amp; groups</p></div></div>
+        <div class="card" onclick="openSeating()" style="cursor:pointer"><div class="card-body center"><h3 style="font-size:1.25rem">Seating plan</h3><p class="muted" style="font-size:.84rem">Who sits where</p></div></div>
+        <div class="card" onclick="go('quote')" style="cursor:pointer"><div class="card-body center"><h3 style="font-size:1.25rem">Request a quote</h3><p class="muted" style="font-size:.84rem">From The Collective</p></div></div>
+      </div>
     </div>
     <div>
       <div class="unlock">
@@ -376,6 +382,62 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:500;line-height:1.08;letter-spa
       <button class="btn btn-sm" onclick="recalcBudget()">Update</button>
     </div>
     <div id="bdg-rows"></div>
+  </div></section>
+</div>
+
+<!-- ============ GUESTS ============ -->
+<div class="view" id="view-guests">
+  <section class="section"><div class="wrap" style="max-width:760px">
+    <a class="link-back" onclick="go('dash')" style="display:inline-block;margin-bottom:22px">← Back to Your Wedding</a>
+    <p class="eyebrow">Your guests</p>
+    <h2 style="font-size:clamp(1.9rem,4.5vw,2.6rem);margin:12px 0 12px">Everyone you love, in one place</h2>
+    <p class="muted">Add your guests, pop them into groups, and keep track of who's coming. When you build your seating plan, everyone here will be ready and waiting.</p>
+    <div class="grid g4" style="gap:12px;margin:26px 0">
+      <div class="panel" style="padding:18px;text-align:center"><div style="font-family:var(--serif);font-size:1.9rem" id="g-total">0</div><small class="muted" style="text-transform:uppercase;letter-spacing:.12em;font-size:.62rem">Invited</small></div>
+      <div class="panel" style="padding:18px;text-align:center"><div style="font-family:var(--serif);font-size:1.9rem;color:var(--sage)" id="g-coming">0</div><small class="muted" style="text-transform:uppercase;letter-spacing:.12em;font-size:.62rem">Coming</small></div>
+      <div class="panel" style="padding:18px;text-align:center"><div style="font-family:var(--serif);font-size:1.9rem;color:var(--gold)" id="g-await">0</div><small class="muted" style="text-transform:uppercase;letter-spacing:.12em;font-size:.62rem">Awaiting</small></div>
+      <div class="panel" style="padding:18px;text-align:center"><div style="font-family:var(--serif);font-size:1.9rem;color:#b06a5a" id="g-dec">0</div><small class="muted" style="text-transform:uppercase;letter-spacing:.12em;font-size:.62rem">Can't make it</small></div>
+    </div>
+    <div style="background:var(--white);border:1px solid var(--line);padding:18px;border-radius:3px;display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;margin-bottom:8px">
+      <div style="flex:2;min-width:150px;text-align:left"><label style="display:block;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);margin-bottom:7px">Name</label><input id="g-name" placeholder="e.g. Aunty Jo" style="width:100%;padding:12px 14px;border:1px solid var(--line);font-family:var(--sans);border-radius:2px;font-weight:300"></div>
+      <div style="flex:1;min-width:110px;text-align:left"><label style="display:block;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);margin-bottom:7px">Group</label><input id="g-group" placeholder="e.g. Family" style="width:100%;padding:12px 14px;border:1px solid var(--line);font-family:var(--sans);border-radius:2px;font-weight:300"></div>
+      <button class="btn btn-sm" onclick="addGuest()">Add</button>
+    </div>
+    <p class="muted" style="font-size:.8rem;margin-bottom:22px">Tip: tap a guest's status to switch between coming, awaiting and can't make it.</p>
+    <div id="g-list"></div>
+  </div></section>
+</div>
+
+<!-- ============ SEATING ============ -->
+<div class="view" id="view-seating">
+  <section class="section"><div class="wrap" style="max-width:880px">
+    <a class="link-back" onclick="go('dash')" style="display:inline-block;margin-bottom:22px">← Back to Your Wedding</a>
+    <p class="eyebrow">Your seating plan</p>
+    <h2 style="font-size:clamp(1.9rem,4.5vw,2.6rem);margin:12px 0 12px">Who sits where</h2>
+    <p class="muted">Tap a guest, then tap a table to seat them. Only the people who've said yes appear here, so it always matches your RSVPs.</p>
+    <div style="margin:24px 0"><p class="eyebrow" style="margin-bottom:10px">Still to seat</p><div id="s-unseated" style="display:flex;flex-wrap:wrap;gap:8px"></div></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin:8px 0 14px"><p class="eyebrow">Your tables</p><button class="btn btn-sm" onclick="addTable()">+ Add a table</button></div>
+    <div id="s-tables" class="grid g3" style="gap:16px"></div>
+  </div></section>
+</div>
+
+<!-- ============ REQUEST A QUOTE ============ -->
+<div class="view" id="view-quote">
+  <section class="section"><div class="wrap consult">
+    <a class="link-back" onclick="go('dash')" style="display:inline-block;margin-bottom:22px">← Back to Your Wedding</a>
+    <div id="q-form">
+      <p class="eyebrow">Request a quote</p>
+      <h2 style="font-size:clamp(1.9rem,4.5vw,2.6rem);margin:12px 0 12px">Let me get you some prices</h2>
+      <p class="muted" style="margin-bottom:26px">Tell me what you're after and I'll reach out to the right people from The Collective myself, then bring you back honest pricing and availability. No call centres, no spam.</p>
+      <div class="field"><label>What are you after?</label><select id="q-cat"><option>Photography</option><option>Florals &amp; styling</option><option>Venue</option><option>Catering</option><option>Cake</option><option>Music &amp; entertainment</option><option>Something else</option></select></div>
+      <div class="field"><label>Your wedding date (optional)</label><input id="q-date" type="date"></div>
+      <div class="field"><label>Anything you'd like them to know? (optional)</label><textarea placeholder="Your style, your guest numbers, anything that matters to you…"></textarea></div>
+      <button class="btn btn-gold" onclick="submitQuote()">Send my request</button>
+    </div>
+    <div id="q-done" style="display:none;text-align:center;padding:20px 0">
+      <div class="voice" style="flex-direction:column;text-align:center;gap:12px;max-width:480px;margin:0 auto"><div class="av" style="margin:0 auto">C</div><div><b style="font-weight:500">Got it, thank you</b><br><small class="muted">I'll personally reach out to the right people and be in touch with you very soon.</small></div></div>
+      <div style="margin-top:28px"><a class="btn" onclick="go('dash')">Back to Your Wedding</a></div>
+    </div>
   </div></section>
 </div>
 
@@ -481,6 +543,64 @@ function renderBudget(total){
 }
 function recalcBudget(){var v=parseInt(String(document.getElementById('bdg-total').value).replace(/[^0-9]/g,''))||35000;document.getElementById('bdg-total').value='$'+v.toLocaleString();renderBudget(v);}
 function openBudget(){var v=35000;if(data.budget){v=parseInt(String(data.budget).replace(/[^0-9]/g,''))||35000;}document.getElementById('bdg-total').value='$'+v.toLocaleString();renderBudget(v);go('budget');}
+
+/* ---- guests ---- */
+var GUESTS=[
+ {name:'Mum & Dad',group:"Ella's family",rsvp:'Coming'},
+ {name:"James's parents",group:"James's family",rsvp:'Coming'},
+ {name:'Aunty Jo',group:"Ella's family",rsvp:'Awaiting'},
+ {name:'Sam & Alex',group:'Friends',rsvp:'Coming'},
+ {name:'Priya',group:'Friends',rsvp:'Awaiting'},
+ {name:'Uncle Pete',group:"James's family",rsvp:'Declined'}
+];
+var RSVPS=['Awaiting','Coming','Declined'];
+function renderGuests(){
+ var html='',coming=0,aw=0,dec=0;
+ for(var i=0;i<GUESTS.length;i++){var g=GUESTS[i];
+  if(g.rsvp==='Coming')coming++;else if(g.rsvp==='Declined')dec++;else aw++;
+  var c=g.rsvp==='Coming'?'var(--sage)':(g.rsvp==='Declined'?'#b06a5a':'var(--gold)');
+  html+='<div style="display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--cream)"><div style="flex:1"><b style="font-weight:400">'+g.name+'</b><div class="muted" style="font-size:.78rem">'+g.group+'</div></div><span onclick="cycleRSVP('+i+')" style="cursor:pointer;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:'+c+';padding:6px 13px;border-radius:40px">'+g.rsvp+'</span><span onclick="removeGuest('+i+')" style="cursor:pointer;color:var(--stone);font-size:1.2rem;line-height:1">×</span></div>';
+ }
+ document.getElementById('g-list').innerHTML=html;
+ document.getElementById('g-total').textContent=GUESTS.length;
+ document.getElementById('g-coming').textContent=coming;
+ document.getElementById('g-await').textContent=aw;
+ document.getElementById('g-dec').textContent=dec;
+}
+function cycleRSVP(i){var idx=RSVPS.indexOf(GUESTS[i].rsvp);GUESTS[i].rsvp=RSVPS[(idx+1)%RSVPS.length];renderGuests();}
+function removeGuest(i){GUESTS.splice(i,1);renderGuests();}
+function addGuest(){var n=document.getElementById('g-name'),gr=document.getElementById('g-group');if(!n.value.trim())return;GUESTS.push({name:n.value.trim(),group:gr.value.trim()||'Guests',rsvp:'Awaiting'});n.value='';gr.value='';renderGuests();}
+function openGuests(){renderGuests();go('guests');}
+
+/* ---- seating ---- */
+var TABLES=[{name:'Top table',guests:['Mum & Dad',"James's parents"]},{name:'Table 2',guests:[]}];
+var selSeat=null;
+function comingGuests(){return GUESTS.filter(function(g){return g.rsvp==='Coming';}).map(function(g){return g.name;});}
+function seatedNames(){var s=[];for(var t=0;t<TABLES.length;t++)s=s.concat(TABLES[t].guests);return s;}
+function renderSeating(){
+ var coming=comingGuests(),seated=seatedNames();
+ var un=coming.filter(function(n){return seated.indexOf(n)<0;});
+ window._un=un;
+ var uh='';
+ if(!un.length)uh='<span class="muted" style="font-size:.9rem">Everyone who is coming has a seat. Lovely.</span>';
+ for(var i=0;i<un.length;i++){var sel=selSeat===un[i];uh+='<span onclick="selectSeatI('+i+')" style="cursor:pointer;padding:8px 14px;border-radius:40px;border:1px solid '+(sel?'var(--gold)':'var(--line)')+';background:'+(sel?'var(--blush)':'var(--white)')+';font-size:.85rem">'+un[i]+'</span>';}
+ document.getElementById('s-unseated').innerHTML=uh;
+ var th='';
+ for(var t=0;t<TABLES.length;t++){
+  var gl='';for(var j=0;j<TABLES[t].guests.length;j++){gl+='<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;font-size:.88rem"><span>'+TABLES[t].guests[j]+'</span><span onclick="event.stopPropagation();unseat('+t+','+j+')" style="cursor:pointer;color:var(--stone)">×</span></div>';}
+  if(!TABLES[t].guests.length)gl='<p class="muted" style="font-size:.8rem">Empty for now. Tap to seat your selected guest.</p>';
+  th+='<div class="panel" onclick="seatAt('+t+')" style="cursor:pointer;padding:20px"><div class="head" style="margin-bottom:10px"><h3 style="font-size:1.2rem">'+TABLES[t].name+'</h3><small class="muted" style="font-size:.66rem">'+TABLES[t].guests.length+' seated</small></div>'+gl+'</div>';
+ }
+ document.getElementById('s-tables').innerHTML=th;
+}
+function selectSeatI(i){var n=window._un[i];selSeat=(selSeat===n?null:n);renderSeating();}
+function seatAt(t){if(!selSeat)return;if(TABLES[t].guests.indexOf(selSeat)<0)TABLES[t].guests.push(selSeat);selSeat=null;renderSeating();}
+function unseat(t,j){TABLES[t].guests.splice(j,1);renderSeating();}
+function addTable(){TABLES.push({name:'Table '+(TABLES.length+1),guests:[]});renderSeating();}
+function openSeating(){selSeat=null;renderSeating();go('seating');}
+
+/* ---- quote ---- */
+function submitQuote(){document.getElementById('q-form').style.display='none';document.getElementById('q-done').style.display='block';window.scrollTo({top:0,behavior:'smooth'});}
 </script>
 </body>
 </html>

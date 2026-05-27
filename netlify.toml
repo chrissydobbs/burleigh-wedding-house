@@ -1,3 +1,9 @@
 # Prototype preview deploy — serves the static prototype/ folder, no build step.
 [build]
   publish = "prototype"
+
+# Always serve the freshest version while we're iterating on the prototype.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

@@ -297,7 +297,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:500;line-height:1.08;letter-spa
         <p class="muted" style="font-size:.85rem;margin-top:14px">Made just for you, around your date and your day.</p>
       </div>
       <div class="grid g2" style="gap:24px">
-        <div class="panel"><div class="head"><h3>Budget</h3></div>
+        <div class="panel"><div class="head"><h3>Budget</h3><a onclick="openBudget()" style="cursor:pointer">View all →</a></div>
           <div class="bud-row"><span class="muted">Allocated</span><b id="budSpent">$11,900</b></div>
           <div class="bar"><span id="budBar" style="width:34%"></span></div>
           <div class="bud-row" style="margin-top:6px"><span class="muted">Total</span><b id="budTotal">$35,000</b></div>
@@ -313,6 +313,15 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:500;line-height:1.08;letter-spa
             <div data-img="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=500&q=70"></div>
           </div>
         </div>
+      </div>
+      <div class="panel" style="margin-top:24px">
+        <div class="head"><h3>Your team &amp; suppliers</h3><a onclick="go('home');jump('collective')" style="cursor:pointer">Browse →</a></div>
+        <div class="todo"><span class="box" style="background:var(--sage);border-color:var(--sage)"></span><span>Celebrant, planning &amp; styling (that's me)</span><small>Sorted</small></div>
+        <div class="todo"><span class="box"></span><span>Photographer</span><small>Browse</small></div>
+        <div class="todo"><span class="box"></span><span>Florist</span><small>Browse</small></div>
+        <div class="todo"><span class="box"></span><span>Venue</span><small>Browse</small></div>
+        <div class="todo"><span class="box"></span><span>Cake &amp; catering</span><small>Browse</small></div>
+        <p class="muted" style="font-size:.85rem;margin-top:14px">With me, the heart of your team is already sorted. I'll help you find the rest, from people I genuinely trust.</p>
       </div>
     </div>
     <div>
@@ -352,6 +361,21 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:500;line-height:1.08;letter-spa
       <div style="flex:1;text-align:left"><label style="display:block;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--stone);margin-bottom:9px">Add your own</label><input id="cl-new" placeholder="e.g. Book a hair and makeup trial" style="width:100%;padding:13px 15px;border:1px solid var(--line);font-family:var(--sans);font-size:1rem;border-radius:2px;font-weight:300"></div>
       <button class="btn btn-sm" onclick="addCL()" style="white-space:nowrap">Add</button>
     </div>
+  </div></section>
+</div>
+
+<!-- ============ BUDGET ============ -->
+<div class="view" id="view-budget">
+  <section class="section"><div class="wrap" style="max-width:760px">
+    <a class="link-back" onclick="go('dash')" style="display:inline-block;margin-bottom:22px">← Back to Your Wedding</a>
+    <p class="eyebrow">Your budget</p>
+    <h2 style="font-size:clamp(1.9rem,4.5vw,2.6rem);margin:12px 0 12px">A gentle plan for the money</h2>
+    <p class="muted">Here's a sensible way to spread things, based on real east coast weddings. Change your total and everything updates. As real quotes come in, we'll track them here too.</p>
+    <div style="background:var(--white);border:1px solid var(--line);padding:22px;border-radius:3px;margin:26px 0;display:flex;gap:14px;align-items:flex-end;flex-wrap:wrap">
+      <div style="flex:1;min-width:200px;text-align:left"><label style="display:block;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--stone);margin-bottom:9px">Your total budget</label><input id="bdg-total" type="text" value="$35,000" style="width:100%;padding:13px 15px;border:1px solid var(--line);font-family:var(--sans);font-size:1.1rem;border-radius:2px;font-weight:300"></div>
+      <button class="btn btn-sm" onclick="recalcBudget()">Update</button>
+    </div>
+    <div id="bdg-rows"></div>
   </div></section>
 </div>
 
@@ -443,6 +467,20 @@ function renderCL(){
 function toggleCL(k){clDone[k]=!clDone[k];renderCL();}
 function addCL(){var i=document.getElementById('cl-new'),v=i.value.trim();if(!v)return;CL[CL.length-1].items.push(v);i.value='';renderCL();}
 function openChecklist(){renderCL();go('checklist');}
+
+/* ---- budget ---- */
+var BUD=[['Venue & catering',0.38],['Photography & video',0.12],['Styling & flowers',0.10],['Attire & beauty',0.08],['Music & entertainment',0.07],['Celebrant & ceremony',0.05],['Cake & extras',0.04],['Stationery',0.03],['Rings',0.03],['Transport',0.02],['Honeymoon & buffer',0.08]];
+function fmt(n){return '$'+Math.round(n).toLocaleString();}
+function renderBudget(total){
+  var html='';
+  for(var i=0;i<BUD.length;i++){
+    var amt=total*BUD[i][1],pct=Math.round(BUD[i][1]*100);
+    html+='<div style="padding:16px 0;border-bottom:1px solid var(--cream)"><div class="bud-row" style="margin-bottom:8px"><span style="font-family:var(--serif);font-size:1.15rem">'+BUD[i][0]+'</span><b>'+fmt(amt)+'</b></div><div class="bar"><span style="width:'+pct+'%"></span></div></div>';
+  }
+  document.getElementById('bdg-rows').innerHTML=html;
+}
+function recalcBudget(){var v=parseInt(String(document.getElementById('bdg-total').value).replace(/[^0-9]/g,''))||35000;document.getElementById('bdg-total').value='$'+v.toLocaleString();renderBudget(v);}
+function openBudget(){var v=35000;if(data.budget){v=parseInt(String(data.budget).replace(/[^0-9]/g,''))||35000;}document.getElementById('bdg-total').value='$'+v.toLocaleString();renderBudget(v);go('budget');}
 </script>
 </body>
 </html>

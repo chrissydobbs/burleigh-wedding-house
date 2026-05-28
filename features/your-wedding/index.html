@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Wedding — Burleigh Wedding House</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ivory:#FBF8F3;
+  --cream:#F4ECDC;
+  --sand:#E7DCCB;
+  --blush:#EADFD5;
+  --sage:#8A917C;
+  --sage-deep:#5F6657;
+  --gold:#B2935B;
+  --gold-soft:#C9B287;
+  --charcoal:#2B2926;
+  --stone:#6B655C;
+  --line:#E2D8C5;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Jost','Helvetica Neue',Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);
+  color:var(--charcoal);
+  background:var(--ivory);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  font-weight:300;
+  font-size:16px;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none;cursor:pointer}
+.serif{font-family:var(--serif);font-weight:400}
+.eyebrow{
+  font-size:.66rem;
+  letter-spacing:.34em;
+  text-transform:uppercase;
+  color:var(--gold);
+  font-weight:400;
+}
+.muted{color:var(--stone)}
+.wrap{max-width:620px;margin:0 auto;padding:0 28px}
+.wide{max-width:840px;margin:0 auto;padding:0 28px}
+
+/* gentle entrance */
+.rise{opacity:0;transform:translateY(14px);animation:rise .9s cubic-bezier(.2,.6,.2,1) forwards}
+.rise.d1{animation-delay:.05s}
+.rise.d2{animation-delay:.22s}
+.rise.d3{animation-delay:.42s}
+.rise.d4{animation-delay:.62s}
+.rise.d5{animation-delay:.82s}
+.rise.d6{animation-delay:1.02s}
+.rise.d7{animation-delay:1.22s}
+@keyframes rise{to{opacity:1;transform:none}}
+
+/* ---------- top welcome ---------- */
+.top{
+  text-align:center;
+  padding:64px 28px 56px;
+  background:linear-gradient(180deg,#FDF9F1 0%,var(--ivory) 100%);
+}
+.top .greet{color:var(--stone)}
+.top h1{
+  font-family:var(--serif);
+  font-size:clamp(2.8rem,9vw,4.6rem);
+  line-height:1.02;
+  margin:18px 0 14px;
+  letter-spacing:.005em;
+}
+.top h1 .amp{font-style:italic;color:var(--gold);font-weight:500}
+.top .where{color:var(--stone);font-size:.9rem;letter-spacing:.02em}
+.count{
+  margin-top:42px;
+  display:flex;align-items:baseline;justify-content:center;gap:14px;
+}
+.count .n{
+  font-family:var(--serif);
+  font-size:clamp(4.2rem,16vw,6.5rem);
+  line-height:1;
+  color:var(--sage-deep);
+  font-weight:500;
+}
+.count .lbl{
+  font-size:.7rem;
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  color:var(--stone);
+  max-width:90px;
+  text-align:left;
+  line-height:1.4;
+}
+.divider{
+  width:38px;height:1px;background:var(--gold);
+  margin:54px auto 0;
+}
+
+/* ---------- story ---------- */
+.story{
+  padding:72px 0;
+  text-align:center;
+}
+.story blockquote{
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:clamp(1.4rem,3.6vw,1.85rem);
+  line-height:1.45;
+  color:var(--charcoal);
+  margin-top:22px;
+  font-weight:400;
+}
+.story blockquote::before{content:"\201C";font-size:2.2em;color:var(--gold-soft);line-height:0;vertical-align:-.35em;margin-right:6px}
+.story blockquote::after{content:"\201D";font-size:2.2em;color:var(--gold-soft);line-height:0;vertical-align:-.35em;margin-left:4px}
+
+/* ---------- note from Chrissy ---------- */
+.note{
+  background:#FFFBF3;
+  border:1px solid var(--line);
+  border-radius:4px;
+  padding:38px 32px 34px;
+  box-shadow:0 14px 40px -28px rgba(43,41,38,.25);
+}
+.note .who{
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:18px;
+}
+.note .av{
+  width:48px;height:48px;border-radius:50%;
+  background:var(--sage-deep);color:var(--ivory);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:1.35rem;font-weight:500;
+}
+.note .who small{color:var(--stone);font-size:.72rem;letter-spacing:.04em;display:block;margin-top:2px}
+.note p{
+  font-size:1.02rem;
+  line-height:1.85;
+  color:#3a3733;
+  margin-bottom:14px;
+}
+.note p:last-of-type{margin-bottom:24px}
+.note .sign{font-family:var(--serif);font-style:italic;color:var(--gold);font-size:1.05rem}
+.note .actions{
+  margin-top:18px;
+  padding-top:20px;
+  border-top:1px solid var(--line);
+  display:flex;flex-direction:column;gap:14px;
+}
+.voice-pill{
+  display:flex;align-items:center;gap:14px;
+  font-size:.86rem;color:var(--stone);cursor:pointer;
+}
+.voice-pill .play{
+  width:34px;height:34px;border-radius:50%;
+  background:var(--gold);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;flex-shrink:0;
+}
+.voice-pill .play::after{
+  content:"";
+  display:block;
+  width:0;height:0;
+  border-left:8px solid #fff;
+  border-top:5px solid transparent;
+  border-bottom:5px solid transparent;
+  margin-left:2px;
+}
+.voice-pill:hover{color:var(--charcoal)}
+.soft-link{
+  font-size:.86rem;
+  color:var(--gold);
+  letter-spacing:.04em;
+  border-bottom:1px solid transparent;
+  align-self:flex-start;
+  transition:border-color .25s;
+}
+.soft-link:hover{border-bottom-color:var(--gold)}
+
+/* ---------- inspiration ---------- */
+.inspire{
+  padding:72px 0 60px;
+  text-align:center;
+}
+.inspire .grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-top:22px;
+}
+.inspire .ph{
+  aspect-ratio:3/4;
+  border-radius:2px;
+  background:linear-gradient(135deg,var(--sand),var(--sage));
+  background-size:cover;
+  background-position:center;
+}
+
+/* ---------- quiet doors ---------- */
+.doors{
+  padding:50px 0 90px;
+  text-align:center;
+}
+.doors .list{
+  margin-top:18px;
+  font-family:var(--serif);
+  font-size:1.18rem;
+  color:var(--stone);
+  line-height:2;
+}
+.doors .list a{
+  color:var(--stone);
+  padding:0 12px;
+  border-bottom:1px solid transparent;
+  transition:color .25s,border-color .25s;
+}
+.doors .list a:hover{color:var(--charcoal);border-bottom-color:var(--gold-soft)}
+.doors .list .dot{color:var(--gold-soft)}
+
+/* ---------- invitation ---------- */
+.invite{
+  background:linear-gradient(170deg,#34392f 0%,var(--sage-deep) 100%);
+  color:var(--ivory);
+  padding:72px 0 80px;
+  text-align:center;
+}
+.invite .eyebrow{color:var(--gold-soft)}
+.invite h2{
+  font-family:var(--serif);
+  font-size:clamp(2rem,5vw,2.8rem);
+  margin:18px 0 22px;
+  font-weight:400;
+  color:var(--ivory);
+}
+.invite p{
+  color:rgba(251,248,243,.82);
+  max-width:480px;
+  margin:0 auto 30px;
+  font-size:1rem;
+}
+.invite .cta{
+  display:flex;flex-direction:column;align-items:center;gap:14px;
+  max-width:320px;margin:0 auto;
+}
+.btn{
+  display:inline-block;
+  width:100%;
+  font-family:var(--sans);
+  font-size:.74rem;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  padding:15px 28px;
+  border:1px solid var(--gold);
+  background:var(--gold);
+  color:#fff;
+  cursor:pointer;
+  text-align:center;
+  transition:all .3s;
+  border-radius:1px;
+}
+.btn:hover{background:transparent;color:var(--gold)}
+.btn.ghost{background:transparent;color:var(--ivory);border-color:rgba(251,248,243,.55)}
+.btn.ghost:hover{background:var(--ivory);color:var(--charcoal);border-color:var(--ivory)}
+
+/* ---------- footer ---------- */
+.foot{
+  text-align:center;
+  padding:50px 28px 40px;
+  color:var(--stone);
+}
+.foot .sign{
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:1.4rem;
+  color:var(--gold);
+  margin-bottom:12px;
+}
+.foot small{
+  font-size:.66rem;
+  letter-spacing:.34em;
+  text-transform:uppercase;
+}
+
+/* ---------- mobile ---------- */
+@media(max-width:520px){
+  .inspire .grid{grid-template-columns:repeat(2,1fr)}
+  .inspire .ph:nth-child(4){display:none}
+  .doors .list{font-size:1.05rem;line-height:2.3}
+  .doors .list a{display:inline-block}
+  .note{padding:30px 24px 28px}
+  .story{padding:56px 0}
+}
+</style>
+</head>
+<body>
+
+<!-- top: welcome + names + countdown -->
+<header class="top">
+  <p class="eyebrow greet rise d1">Welcome back, Ella</p>
+  <h1 class="rise d2">Ella <span class="amp">&amp;</span> James</h1>
+  <p class="where rise d3">Thursday, 1 April 2027 &middot; Tamar Valley, Tasmania</p>
+  <div class="count rise d4">
+    <span class="n" id="cdn">312</span>
+    <span class="lbl">days<br>until<br>your day</span>
+  </div>
+  <div class="divider rise d5"></div>
+</header>
+
+<!-- the story -->
+<section class="story">
+  <div class="wrap">
+    <p class="eyebrow rise d1">Your day</p>
+    <blockquote class="rise d2">It will be heritage and timeless. A warm afternoon, golden light, candles by sundown, and just the two of you and the people you love.</blockquote>
+  </div>
+</section>
+
+<!-- a note from Chrissy -->
+<section style="padding:8px 0 14px">
+  <div class="wrap">
+    <div class="note rise d1">
+      <div class="who">
+        <div class="av">C</div>
+        <div>
+          <b style="font-weight:500;font-family:var(--serif);font-size:1.15rem">A note from me</b>
+          <small>Recorded this morning</small>
+        </div>
+      </div>
+      <p>I've been thinking about the way you described your day, and I keep coming back to one thing: warmth. The kind of golden, candlelit warmth that feels like home.</p>
+      <p>When you have a quiet ten minutes this week, I'd love for you to think about your photographer. Tasmania books up early and you're at the lovely point of choosing. I've started a shortlist of three I'd trust with the mood you described. No rush at all. Just a thought.</p>
+      <p class="sign">Chrissy x</p>
+      <div class="actions">
+        <div class="voice-pill"><span class="play"></span><span>Hear me say it &middot; 38 seconds</span></div>
+        <a class="soft-link">Open the photographer shortlist &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- a little inspiration -->
+<section class="inspire">
+  <div class="wrap">
+    <p class="eyebrow rise d1">A little inspiration</p>
+    <div class="grid rise d2">
+      <div class="ph" data-img="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=600&q=70"></div>
+      <div class="ph" data-img="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=600&q=70"></div>
+      <div class="ph" data-img="https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=600&q=70"></div>
+      <div class="ph" data-img="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=600&q=70"></div>
+    </div>
+  </div>
+</section>
+
+<!-- quiet doors -->
+<section class="doors">
+  <div class="wide">
+    <p class="eyebrow rise d1">Everything else, when you're ready</p>
+    <div class="list rise d2">
+      <a>Your checklist</a><span class="dot">&middot;</span>
+      <a>Your budget</a><span class="dot">&middot;</span>
+      <a>Your guests</a><span class="dot">&middot;</span>
+      <a>Your seating</a><span class="dot">&middot;</span>
+      <a>Your suppliers</a><span class="dot">&middot;</span>
+      <a>Your wedding website</a>
+    </div>
+  </div>
+</section>
+
+<!-- warm invitation -->
+<section class="invite">
+  <div class="wrap">
+    <p class="eyebrow rise d1">When you're ready for more</p>
+    <h2 class="rise d2">Let's do this together.</h2>
+    <p class="rise d3">Everything you've seen so far is yours to use, for free, always. When you're ready for the full planning suite, there are two lovely ways in.</p>
+    <div class="cta rise d4">
+      <a class="btn">Book a chat with me</a>
+      <a class="btn ghost">Explore Burleigh Bride</a>
+    </div>
+  </div>
+</section>
+
+<!-- footer -->
+<footer class="foot">
+  <div class="sign">You're in good hands. Chrissy x</div>
+  <small>Burleigh Wedding House</small>
+</footer>
+
+<script>
+// gracefully load real photography on top of the soft gradient placeholders
+window.addEventListener('load', function(){
+  document.querySelectorAll('[data-img]').forEach(function(el){
+    var url = el.getAttribute('data-img');
+    var img = new Image();
+    img.onload = function(){
+      el.style.backgroundImage = "linear-gradient(0deg,rgba(43,41,38,.05),rgba(43,41,38,.05)),url('"+url+"')";
+    };
+    img.src = url;
+  });
+
+  // live-ish countdown to 1 April 2027
+  var target = new Date('2027-04-01T00:00:00+10:00');
+  var days = Math.max(0, Math.ceil((target - new Date()) / 86400000));
+  document.getElementById('cdn').textContent = days;
+});
+</script>
+</body>
+</html>

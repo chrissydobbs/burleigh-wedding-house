@@ -13,6 +13,20 @@ Every decision below is checked against: *(a) can a solo dev build/maintain it, 
 
 ---
 
+## 0. Confirmed product direction (founder decision, 28 May 2026)
+
+After reviewing competitor audits (Easy Weddings, The Knot, Zola) and an AI-first "marketplace" concept, the founder chose to **keep Burleigh Wedding House as her own full-service wedding business** — she is the real celebrant, planner and stylist — and to **use AI as her behind-the-scenes assistant and as couple-facing magic, never as a replacement for her.** We are explicitly **not** building a venture-scale vendor marketplace; the differentiator is that the planner is a real, present person.
+
+AI does the busywork and amplifies her, while she stays the human heart:
+- **Drafted, not blank, and in her voice:** AI drafts vendor enquiries, couple replies, real-wedding writeups and the first draft of each couple's wedding website. She approves and adds the personal touch (voice notes, real calls).
+- **Smart, adaptive planning:** the checklist adapts as things get booked (not a static list); the budget is benchmarked to real east-coast prices; RSVPs chase themselves; seating can auto-arrange and be refined by chat.
+- **Quote help:** when a couple requests pricing, AI normalises vendor replies into a simple side-by-side for the couple and for her.
+- **The concierge is Chrissy**, with AI handling the admin so she can be present for the parts that matter.
+
+Everything in §§2–8 still stands; this section fixes *who the AI is for* (her and her couples) and rules out the marketplace pivot.
+
+---
+
 ## 1. The central decision: how couples reach the paid tiers (read first)
 
 Two constraints rule out the obvious models. The founder wants to earn from couples (tiers: Free / Tier 1 / Tier 2) — but **not hidden/"invisible" subscriptions** (sneaky) and **not the cold "sign up and give us your money" SaaS model** (impersonal). The brief adds: no pricing page in the nav, no mid-flow paywall, never feels sold to. **The founder chose both warm routes below — she needs to make money, and both do, while staying personal.**

@@ -328,6 +328,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:500;line-height:1.08;letter-spa
         <div class="card" onclick="openGuests()" style="cursor:pointer"><div class="card-body center"><h3 style="font-size:1.25rem">Guest list</h3><p class="muted" style="font-size:.84rem">RSVPs &amp; groups</p></div></div>
         <div class="card" onclick="openSeating()" style="cursor:pointer"><div class="card-body center"><h3 style="font-size:1.25rem">Seating plan</h3><p class="muted" style="font-size:.84rem">Who sits where</p></div></div>
         <div class="card" onclick="go('quote')" style="cursor:pointer"><div class="card-body center"><h3 style="font-size:1.25rem">Request a quote</h3><p class="muted" style="font-size:.84rem">From The Collective</p></div></div>
+        <div class="card" onclick="openWebsite()" style="cursor:pointer"><div class="card-body center"><h3 style="font-size:1.25rem">Wedding website</h3><p class="muted" style="font-size:.84rem">Drafted for you</p></div></div>
       </div>
     </div>
     <div>
@@ -437,6 +438,46 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:500;line-height:1.08;letter-spa
     <div id="q-done" style="display:none;text-align:center;padding:20px 0">
       <div class="voice" style="flex-direction:column;text-align:center;gap:12px;max-width:480px;margin:0 auto"><div class="av" style="margin:0 auto">C</div><div><b style="font-weight:500">Got it, thank you</b><br><small class="muted">I'll personally reach out to the right people and be in touch with you very soon.</small></div></div>
       <div style="margin-top:28px"><a class="btn" onclick="go('dash')">Back to Your Wedding</a></div>
+    </div>
+  </div></section>
+</div>
+
+<!-- ============ WEDDING WEBSITE ============ -->
+<div class="view" id="view-website">
+  <section class="section"><div class="wrap" style="max-width:980px">
+    <a class="link-back" onclick="go('dash')" style="display:inline-block;margin-bottom:22px">← Back to Your Wedding</a>
+    <p class="eyebrow">Your wedding website</p>
+    <h2 style="font-size:clamp(1.9rem,4.5vw,2.6rem);margin:12px 0 12px">I've made a start for you</h2>
+    <p class="muted">I've drafted your guest website from what you've told me so far. Have a read, change anything that isn't quite right, and it's ready to share whenever you are.</p>
+    <div class="grid g2" style="margin-top:24px;align-items:start">
+      <div>
+        <div class="panel" style="margin-bottom:16px">
+          <p class="eyebrow" style="margin-bottom:10px">Your story</p>
+          <textarea id="wb-story" oninput="document.getElementById('wb-preview-story').textContent=this.value" style="width:100%;min-height:150px;border:1px solid var(--line);border-radius:6px;padding:12px;font-family:var(--sans);font-size:.98rem;font-weight:300;line-height:1.6"></textarea>
+          <p class="muted" style="font-size:.78rem;margin-top:8px">Edit this and the preview updates as you type. The real version writes a first draft in your own voice.</p>
+        </div>
+        <div class="panel" style="margin-bottom:16px">
+          <p class="eyebrow" style="margin-bottom:10px">The day</p>
+          <div class="muted" style="font-size:.92rem;line-height:1.9">3:30pm · Ceremony<br>4:30pm · Drinks &amp; canapés<br>6:00pm · Reception</div>
+        </div>
+        <div class="panel">
+          <p class="eyebrow" style="margin-bottom:10px">Questions your guests will ask</p>
+          <div class="muted" style="font-size:.92rem;line-height:1.9">Dress code? · Are children welcome? · What happens if it rains? · Where do we park?</div>
+        </div>
+      </div>
+      <div class="panel" style="padding:0;overflow:hidden">
+        <div style="background:var(--cream);padding:9px 14px;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);border-bottom:1px solid var(--line)">What your guests will see</div>
+        <div style="background:linear-gradient(160deg,var(--sage-deep),#34392f);color:var(--ivory);padding:48px 24px;text-align:center">
+          <p style="letter-spacing:.2em;text-transform:uppercase;font-size:.7rem;opacity:.85" id="wb-date">Your wedding day</p>
+          <h2 style="font-family:var(--serif);font-size:2.4rem;margin:12px 0;color:var(--ivory)" id="wb-names">Your names</h2>
+          <p style="opacity:.9;font-size:.95rem" id="wb-loc">Your venue</p>
+          <span class="btn btn-gold btn-sm" style="margin-top:20px">RSVP</span>
+        </div>
+        <div style="padding:26px">
+          <p class="eyebrow" style="margin-bottom:10px">Our story</p>
+          <p class="muted" id="wb-preview-story" style="font-size:.96rem;line-height:1.7"></p>
+        </div>
+      </div>
     </div>
   </div></section>
 </div>
@@ -601,6 +642,21 @@ function openSeating(){selSeat=null;renderSeating();go('seating');}
 
 /* ---- quote ---- */
 function submitQuote(){document.getElementById('q-form').style.display='none';document.getElementById('q-done').style.display='block';window.scrollTo({top:0,behavior:'smooth'});}
+
+/* ---- wedding website ---- */
+function openWebsite(){
+  var names=data.names||'Ella & James';
+  var loc=data.location||'somewhere lovely on the coast';
+  var dateTxt='Your wedding day';
+  if(data.date){var d=new Date(data.date);if(!isNaN(d))dateTxt=d.toLocaleDateString('en-AU',{weekday:'long',day:'numeric',month:'long',year:'numeric'});}
+  var story="We still can't quite believe we're here, but we are, and we're getting married. There's nothing we'd love more than to have the people we love around us on the day. Keep this page handy for all the details, and please let us know you're coming when you can. We can't wait to celebrate with you.";
+  document.getElementById('wb-story').value=story;
+  document.getElementById('wb-preview-story').textContent=story;
+  document.getElementById('wb-names').textContent=names;
+  document.getElementById('wb-loc').textContent=loc;
+  document.getElementById('wb-date').textContent=dateTxt;
+  go('website');
+}
 </script>
 </body>
 </html>
